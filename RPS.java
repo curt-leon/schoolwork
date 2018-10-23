@@ -1,6 +1,5 @@
 package schoolwork;
 
-
 import java.util.Scanner;
 import java.util.Random;
 
@@ -18,7 +17,7 @@ public class RPS {
 		
 		Attack pick = null, compPick = null;
 		String input, yesnoInput;
-		boolean keepPlaying = false;
+		boolean keepPlaying = false, rpsBool = true;
 		
 
 		System.out.println("Would you like to play Rock, Paper, Scissors?");
@@ -34,7 +33,7 @@ public class RPS {
 		while (keepPlaying == true) {
 			
 
-				
+			while (rpsBool == true) {	
 			System.out.println("Rock, Paper, or Scissors?");
 			input = sc.next();		
 		
@@ -43,22 +42,25 @@ public class RPS {
 				case "ROCK":
 				case "Rock":
 					pick = Attack.ROCK;	
+					rpsBool = false;
 					break;
 				case "Scissors":
 				case "scissors":
 				case "SCISSORS":
 					pick = Attack.SCISSORS;
+					rpsBool = false;
 					break;
 				case "PAPER":
 				case "paper":
 				case "Paper":
 					pick = Attack.PAPER;
+					rpsBool = false;
 					break;
 			
 				default:
 					System.out.println("oops, couldn't read your choice! try again!");
 					break;
-				}
+				}}
 		
 		
 			compPick = randomAttack();
@@ -66,13 +68,13 @@ public class RPS {
 			if ((compPick == Attack.SCISSORS && pick == Attack.SCISSORS) || 
 					(compPick == Attack.ROCK && pick == Attack.ROCK) ||
 					(compPick == Attack.PAPER && pick == Attack.PAPER)) {
-					System.out.println("Draw! \nYou Picked:" + pick + "\n Computer Picked" + compPick);
+					System.out.println("Draw! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
 					draw++;
 				}
 			if ((compPick == Attack.SCISSORS && pick == Attack.ROCK) || 
 					(compPick == Attack.ROCK && pick == Attack.PAPER) ||
 					(compPick == Attack.PAPER && pick == Attack.SCISSORS)) {
-					System.out.println("You Win! \nYou Picked:" + pick + "\n Computer Picked" + compPick);
+					System.out.println("You Win! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
 					win++;
 				}
 			if ((compPick == Attack.SCISSORS && pick == Attack.PAPER) || 
