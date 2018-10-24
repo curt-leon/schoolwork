@@ -11,11 +11,14 @@ public class RPS {
 		SCISSORS
 	}
 
+	public static Attack pick = null, compPick = null;
+	public static int win = 0, lose = 0, draw = 0;
 	
 	public static void main(String[] args) {
+	
 		Scanner sc = new Scanner(System.in);
 		
-		Attack pick = null, compPick = null;
+		
 		String input, yesnoInput;
 		boolean keepPlaying = false, rpsBool = true;
 		
@@ -28,7 +31,7 @@ public class RPS {
 		else if (yesnoInput.equalsIgnoreCase("no"))
 			keepPlaying = false;
 		
-		int win = 0, lose = 0, draw = 0;
+		
 		
 		while (keepPlaying == true) {
 			
@@ -65,24 +68,8 @@ public class RPS {
 		
 			compPick = randomAttack();
 			
-			if ((compPick == Attack.SCISSORS && pick == Attack.SCISSORS) || 
-					(compPick == Attack.ROCK && pick == Attack.ROCK) ||
-					(compPick == Attack.PAPER && pick == Attack.PAPER)) {
-					System.out.println("Draw! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
-					draw++;
-				}
-			if ((compPick == Attack.SCISSORS && pick == Attack.ROCK) || 
-					(compPick == Attack.ROCK && pick == Attack.PAPER) ||
-					(compPick == Attack.PAPER && pick == Attack.SCISSORS)) {
-					System.out.println("You Win! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
-					win++;
-				}
-			if ((compPick == Attack.SCISSORS && pick == Attack.PAPER) || 
-					(compPick == Attack.ROCK && pick == Attack.SCISSORS) ||
-					(compPick == Attack.PAPER && pick == Attack.ROCK)) {
-					System.out.println("You Lose! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
-					lose++;
-			}
+			RPSTest();
+		
 			System.out.println("Would you like to play again? \n You have won " + win + " games, the computer has won " + lose + " games, and you have drawn " + draw + " games.");	
 			yesnoInput = sc.next();
 			if(yesnoInput.equalsIgnoreCase("yes")) {
@@ -106,6 +93,27 @@ public class RPS {
 private static Attack randomAttack() {
     int pick = new Random().nextInt(Attack.values().length);
     return Attack.values()[pick];
+}
+
+public static void RPSTest() {
+	if ((compPick == Attack.SCISSORS && pick == Attack.SCISSORS) || 
+			(compPick == Attack.ROCK && pick == Attack.ROCK) ||
+			(compPick == Attack.PAPER && pick == Attack.PAPER)) {
+			System.out.println("Draw! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
+			draw++;
+		}
+	if ((compPick == Attack.SCISSORS && pick == Attack.ROCK) || 
+			(compPick == Attack.ROCK && pick == Attack.PAPER) ||
+			(compPick == Attack.PAPER && pick == Attack.SCISSORS)) {
+			System.out.println("You Win! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
+			win++;
+		}
+	if ((compPick == Attack.SCISSORS && pick == Attack.PAPER) || 
+			(compPick == Attack.ROCK && pick == Attack.SCISSORS) ||
+			(compPick == Attack.PAPER && pick == Attack.ROCK)) {
+			System.out.println("You Lose! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
+			lose++;
+	}
 }
 
 }
