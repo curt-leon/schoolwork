@@ -1,0 +1,130 @@
+import java.util.Random;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Container;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
+
+@SuppressWarnings("unused")
+class RPSGUI extends JPanel implements ActionListener{
+	public enum Attack {
+		ROCK,
+		PAPER,
+		SCISSORS
+	}
+
+	protected JButton rockB, paperB, scissorsB, paB, pB;
+	
+	public RPSGUI() {
+	
+	rockB = new JButton ("Rock");
+	rockB.setVerticalTextPosition(AbstractButton.CENTER);
+    rockB.setHorizontalTextPosition(AbstractButton.LEADING);
+    
+    paperB = new JButton ("Paper");
+	paperB.setVerticalTextPosition(AbstractButton.CENTER);
+    paperB.setHorizontalTextPosition(AbstractButton.CENTER);
+    
+    scissorsB = new JButton ("Scissors");
+	scissorsB.setVerticalTextPosition(AbstractButton.CENTER);
+    scissorsB.setHorizontalTextPosition(AbstractButton.TRAILING);
+    
+    paB = new JButton ("Play Again?");
+    pB = new JButton ("Play");
+    
+    rockB.addActionListener(this);
+    paperB.addActionListener(this);
+    scissorsB.addActionListener(this);
+    
+	
+	
+	
+	}
+	
+	private static void CreateShowGUI() {
+		 JFrame frame = new JFrame("Rock, Paper, Scissors!");
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 
+	        
+	        RPSGUI newContentPane = new RPSGUI();
+	        newContentPane.setOpaque(true); //content panes must be opaque
+	        frame.setContentPane(newContentPane);
+	 
+	        //Display the window.
+	        frame.pack();
+	        frame.setVisible(true);
+	}
+	
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		
+	}
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		JFrame window = new JFrame("Graphics Demo");
+	    // Set this window's location and size:
+	    // upper-left corner at 300, 300; width 200, height 150
+	    window.setBounds(500, 200, 1000, 700);
+	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	 
+	    window.setVisible(true);
+	}	
+	
+		
+
+	public static void RPSTest() {
+		if ((compPick == Attack.SCISSORS && pick == Attack.SCISSORS) || 
+				(compPick == Attack.ROCK && pick == Attack.ROCK) ||
+				(compPick == Attack.PAPER && pick == Attack.PAPER)) {
+				System.out.println("Draw! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
+				draw++;
+			}
+		if ((compPick == Attack.SCISSORS && pick == Attack.ROCK) || 
+				(compPick == Attack.ROCK && pick == Attack.PAPER) ||
+				(compPick == Attack.PAPER && pick == Attack.SCISSORS)) {
+				System.out.println("You Win! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
+				win++;
+			}
+		if ((compPick == Attack.SCISSORS && pick == Attack.PAPER) || 
+				(compPick == Attack.ROCK && pick == Attack.SCISSORS) ||
+				(compPick == Attack.PAPER && pick == Attack.ROCK)) {
+				System.out.println("You Lose! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
+				lose++;
+		}
+	}
+
+
+private static Attack randomAttack() {
+    int pick = new Random().nextInt(Attack.values().length);
+    return Attack.values()[pick];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
