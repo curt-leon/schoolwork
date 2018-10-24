@@ -22,19 +22,22 @@ public class RPS {
 		String input, yesnoInput;
 		boolean keepPlaying = false, rpsBool = true;
 		
+		try {
 
 		System.out.println("Would you like to play Rock, Paper, Scissors?");
-		yesnoInput = sc.next();
+		yesnoInput = sc.nextLine();
 		
 		if(yesnoInput.equalsIgnoreCase("yes"))
 			keepPlaying = true;
 		else if (yesnoInput.equalsIgnoreCase("no"))
 			keepPlaying = false;
 		
-		
+		} catch (IllegalArgumentException e) {
+			System.out.println("Couldn't read input!");
+		}
 		
 		while (keepPlaying == true) {
-			
+			rpsBool = true;
 
 			while (rpsBool == true) {	
 			System.out.println("Rock, Paper, or Scissors?");
