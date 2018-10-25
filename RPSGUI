@@ -2,6 +2,8 @@ import java.util.Random;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
+import javax.swing.JLabel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.AbstractButton;
@@ -13,6 +15,7 @@ import java.awt.event.KeyEvent;
 
 
 @SuppressWarnings("unused")
+
 class RPSGUI extends JPanel implements ActionListener{
 	public enum Attack {
 		ROCK,
@@ -20,10 +23,17 @@ class RPSGUI extends JPanel implements ActionListener{
 		SCISSORS
 	}
 
-	protected JButton rockB, paperB, scissorsB, paB, pB;
+	static Attack pick = null, compPick = null;
+	static int win = 0, lose = 0, draw = 0;
+	
+	
+	protected  JButton rockB, paperB, scissorsB, paB;
+	JLabel intro, winL, loseL, drawL;
 	
 	public RPSGUI() {
 	
+		
+		
 	rockB = new JButton ("Rock");
 	rockB.setVerticalTextPosition(AbstractButton.CENTER);
     rockB.setHorizontalTextPosition(AbstractButton.LEADING);
@@ -36,58 +46,77 @@ class RPSGUI extends JPanel implements ActionListener{
 	scissorsB.setVerticalTextPosition(AbstractButton.CENTER);
     scissorsB.setHorizontalTextPosition(AbstractButton.TRAILING);
     
-    paB = new JButton ("Play Again?");
-    pB = new JButton ("Play");
+    paB = new JButton ("Play Again");
+  
+    rockB.addActionListener((new ActionListener()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+        	
+        	pick = Attack.ROCK;
+        	compPick = randomAttack();
+        	rockB.setVisible(false); paperB.setVisible(false); scissorsB.setVisible(false);
+        	
+        }
+    }));
+    paperB.addActionListener(new ActionListener()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+        	pick = Attack.PAPER;
+        	rockB.setVisible(false); paperB.setVisible(false); scissorsB.setVisible(false);
+        	compPick = randomAttack();
+        	
+        }
+    });
+    scissorsB.addActionListener(new ActionListener()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+        	pick = Attack.SCISSORS;
+        	rockB.setVisible(false); paperB.setVisible(false); scissorsB.setVisible(false);
+        	compPick = randomAttack();
+        	JLabel Test;
+        }
+    });
+    paB.addActionListener(this);
+  
     
-    rockB.addActionListener(this);
-    paperB.addActionListener(this);
-    scissorsB.addActionListener(this);
+    JFrame frame = new JFrame("Rock, Paper, Scissors!");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.add(new JLabel("Welcome to Rock, Paper, Scissors!"));
+    frame.add(rockB);
+	frame.add(paperB);
+	frame.add(scissorsB);
     
-	
-	
-	
-	}
-	
-	private static void CreateShowGUI() {
-		 JFrame frame = new JFrame("Rock, Paper, Scissors!");
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 
-	        
-	        RPSGUI newContentPane = new RPSGUI();
-	        newContentPane.setOpaque(true); //content panes must be opaque
-	        frame.setContentPane(newContentPane);
-	 
-	        //Display the window.
-	        frame.pack();
-	        frame.setVisible(true);
-	}
-	
-	
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
+	frame.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 200));
+    frame.setBounds(650, 300, 500, 400);
 
-		
+    //Display the window.
+  
+    frame.setVisible(true);
+	
+
+	
 	}
 	
 	
 	
+	
+	
+
 	
 	
 	public static void main(String[] args) {
-		JFrame window = new JFrame("Graphics Demo");
-	    // Set this window's location and size:
-	    // upper-left corner at 300, 300; width 200, height 150
-	    window.setBounds(500, 200, 1000, 700);
-	    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	 
-	    window.setVisible(true);
+		
+		new RPSGUI();
+		
 	}	
 	
 		
-
 	public static void RPSTest() {
+		
+	
 		if ((compPick == Attack.SCISSORS && pick == Attack.SCISSORS) || 
 				(compPick == Attack.ROCK && pick == Attack.ROCK) ||
 				(compPick == Attack.PAPER && pick == Attack.PAPER)) {
@@ -106,7 +135,7 @@ class RPSGUI extends JPanel implements ActionListener{
 				System.out.println("You Lose! \nYou Picked: " + pick + "\nComputer Picked: " + compPick);
 				lose++;
 		}
-	}
+	} 
 
 
 private static Attack randomAttack() {
@@ -121,8 +150,11 @@ private static Attack randomAttack() {
 
 
 
-
-
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	
+}
 
 
 
