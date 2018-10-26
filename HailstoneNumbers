@@ -1,0 +1,45 @@
+package schoolwork;
+
+import java.util.Scanner;
+
+public class HailstoneNumbers {
+
+	public static void main(String[] args) {
+	
+		Scanner sc = new Scanner(System.in);
+
+		long input, initialInput;
+		int repeat = 0;
+		
+		
+		System.out.println("Enter a number:");
+		initialInput = sc.nextLong();
+		
+		input = initialInput;
+		
+	while (input > 1) {
+		
+		try {
+			Thread.sleep(500);
+		} catch (Exception e) {
+			
+		}
+		
+		if (input % 2 == 0) {
+			
+			input = input / 2;
+			
+		} else {
+			input = 3 * input + 1;
+			
+		}
+		System.out.println("The number was " + initialInput + ", but now it is " + input + ".");
+		initialInput = input;
+		repeat++;
+		
+	}
+	 	System.out.println("It took the system "+repeat+" tries to get the number to one.");
+	
+	}
+
+}
